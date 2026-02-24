@@ -1,0 +1,40 @@
+<idea-plugin>
+    <id>com.opencode.pycharm</id>
+    <name>OpenCode Assistant</name>
+    <vendor email="team@opencode.dev" url="https://opencode.dev">OpenCode</vendor>
+
+    <description><![CDATA[
+      Cursor-like assistant interface for PyCharm: chat workspace, context panel, and inline edit prompt.
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow
+                id="OpenCode"
+                icon="AllIcons.Toolwindows.ToolWindowMessages"
+                factoryClass="com.opencode.pycharm.toolwindow.OpenCodeToolWindowFactory"
+                anchor="right"
+                canCloseContents="false"/>
+
+        <projectService serviceImplementation="com.opencode.pycharm.services.OpenCodeStateService"/>
+    </extensions>
+
+    <actions>
+        <action id="OpenCode.OpenToolWindowAction"
+                class="com.opencode.pycharm.actions.OpenToolWindowAction"
+                text="OpenCode: Open Assistant"
+                description="Open OpenCode assistant panel">
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt o"/>
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+
+        <action id="OpenCode.InlinePromptAction"
+                class="com.opencode.pycharm.actions.InlinePromptAction"
+                text="OpenCode: Ask About Selection"
+                description="Send selected code to OpenCode">
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt enter"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>
