@@ -1,0 +1,50 @@
+<idea-plugin>
+    <id>com.opencode.pycharm.plugin</id>
+    <name>OpenCode for PyCharm</name>
+    <vendor email="support@opencode.dev" url="https://opencode.dev">OpenCode</vendor>
+
+    <description><![CDATA[
+        Cursor-style AI coding assistant for PyCharm powered by OpenCode over ACP.
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceImplementation="com.opencode.pycharm.service.OpenCodeService"/>
+        <toolWindow id="OpenCode" anchor="right" factoryClass="com.opencode.pycharm.ui.OpenCodeToolWindowFactory" canCloseContents="false"/>
+        <postStartupActivity implementation="com.opencode.pycharm.service.OpenCodeStartupActivity"/>
+    </extensions>
+
+    <actions>
+        <action id="OpenCode.InlinePrompt"
+                class="com.opencode.pycharm.actions.InlinePromptAction"
+                text="OpenCode Inline Prompt"
+                description="Invoke Cursor-like inline edit prompt">
+            <keyboard-shortcut keymap="$default" first-keystroke="meta K"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="control K"/>
+        </action>
+
+        <action id="OpenCode.OpenChat"
+                class="com.opencode.pycharm.actions.OpenChatToolWindowAction"
+                text="OpenCode Chat"
+                description="Open OpenCode chat tool window">
+            <keyboard-shortcut keymap="$default" first-keystroke="meta L"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="control L"/>
+        </action>
+
+        <action id="OpenCode.AcceptGhostText"
+                class="com.opencode.pycharm.actions.AcceptGhostTextAction"
+                text="OpenCode Accept Ghost Text"
+                description="Accept full ghost text suggestion">
+            <keyboard-shortcut keymap="$default" first-keystroke="TAB"/>
+        </action>
+
+        <action id="OpenCode.AcceptGhostTextByWord"
+                class="com.opencode.pycharm.actions.AcceptGhostTextByWordAction"
+                text="OpenCode Accept Ghost Text By Word"
+                description="Accept next ghost text word">
+            <keyboard-shortcut keymap="$default" first-keystroke="meta RIGHT"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="control RIGHT"/>
+        </action>
+    </actions>
+</idea-plugin>
